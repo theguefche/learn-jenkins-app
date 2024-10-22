@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Starting ...') {
-            steps {
-                echo 'Starting ...'
-            }
-        }
 
         stage('Build') {
             agent {
@@ -15,7 +10,6 @@ pipeline {
                     reuseNode true
                 }
             }
-
             steps {
                 sh '''
                     ls -la
@@ -90,12 +84,6 @@ pipeline {
                     node_modules/.bin/netlify --version
                 '''
             }
-        }
-    }
-
-    post {
-        always {
-            junit 'test-results/junit.xml'
         }
     }
 }
