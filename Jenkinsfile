@@ -1,22 +1,22 @@
 pipeline {
     agent any
 
-    stages{
-        stage("Starting ..." ) {
-            steps{
-                echo "Starting ..."
+    stages {
+        stage('Starting ...') {
+            steps {
+                echo 'Starting ...'
             }
         }
 
         stage('Build') {
-            agent{
+            agent {
                 docker {
-                    image "node:18-alpine"
+                    image 'node:18-alpine'
                     reuseNode true
                 }
             }
 
-            steps{
+            steps {
                 sh '''
                     ls -la
                     node --version
@@ -29,27 +29,25 @@ pipeline {
         }
 
         stage('Test') {
-            agent{
+            agent {
                 docker {
-                    image "node:18-alpine"
+                    image 'node:18-alpine'
                     reuseNode true
                 }
             }
 
-            steps{
+            steps {
                 sh '''
                     test -f build/index.html
                     npm test
                 '''
-            }   
-        }
-
-        post {
-            always {
-                junit "test-results/junit.xml"
             }
         }
+    }
 
-
+    post {
+        always {
+            junit 'test-results/junit.xml'
+        }
     }
 }
