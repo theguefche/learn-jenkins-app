@@ -7,14 +7,15 @@ pipeline {
 
     stages {
 
-        stage('Starting') {
-            agent any
-            steps {
-                sh '''
-                    docker ps
-                '''
-            }
-        }
+        // stage('Starting') {
+        //     agent any
+        //     steps {
+        //         sh '''
+        //             docker
+        //             docker ps
+        //         '''
+        //     }
+        // }
 
         stage('Build') {
             agent {
